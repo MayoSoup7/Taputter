@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Taputter たぷったー</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="tsns-root">
+  <div id="tsns-app">
+
+    <!-- ===== HEADER ===== -->
+    <div id="tsns-header">
+      <div id="tsns-logo">
+        <span id="tsns-logo-icon">💗</span>
+        <span>Taputter たぷったー</span>
+      </div>
+      <div id="tsns-header-right">
+        <button id="tsns-tl-refresh-btn" title="タイムラインを更新">TL更新</button>
+        <button id="tsns-header-icon-btn" title="設定">⚙️</button>
+      </div>
+    </div>
+
+    <!-- ===== CONTENT ===== -->
+    <div id="tsns-content">
+
+      <!-- ---- ホーム（タイムライン） ---- -->
+      <div id="tsns-panel-home" class="tsns-panel">
+        <div id="tsns-post-box">
+          <textarea id="tsns-post-input" placeholder="たぷへの気持ちを投稿しよう" rows="1"></textarea>
+          <select id="tsns-post-tier-select" title="投稿の反応をシミュレートできます">
+            <option value="">🎲 ランダム</option>
+            <option value="buzz">🎉 バズる</option>
+            <option value="enjou">🔥 炎上</option>
+          </select>
+          <button id="tsns-post-send">投稿</button>
+        </div>
+        <div id="tsns-timeline" class="tsns-feed">
+          <div class="tsns-loading">読み込み中…</div>
+        </div>
+      </div>
+
+      <!-- ---- DM ---- -->
+      <div id="tsns-panel-dm" class="tsns-panel tsns-hidden">
+        <div id="tsns-dm-topbar">
+          <div class="tsns-avatar sm" id="tsns-dm-topbar-avatar" style="background:#ff4fa3;"><img src="assets/img/tapu.jpg" alt=""></div>
+          <div>
+            <div class="tsns-dm-name">たぷたぷぷ</div>
+            <div class="tsns-dm-sub">@taputapupu</div>
+          </div>
+        </div>
+        <div id="tsns-dm-mode-bar">
+          <button class="tsns-mode-btn" data-mode="zatsudan">💬 雑談</button>
+          <button class="tsns-mode-btn" data-mode="zentei">💯 全肯定</button>
+          <button class="tsns-mode-btn" data-mode="ouen">📣 応援</button>
+          <button class="tsns-mode-btn" data-mode="amaama">💕 甘々</button>
+          <button class="tsns-mode-btn" data-mode="soudan">🧸 相談</button>
+          <button class="tsns-mode-btn" data-mode="aori">😏 煽り</button>
+          <button class="tsns-mode-btn" data-mode="mesugaki">😼 メスガキ</button>
+          <button class="tsns-mode-btn" data-mode="tsundere">😤 ツンデレ</button>
+          <button class="tsns-mode-btn" data-mode="ojousama">👑 お嬢様</button>
+        </div>
+        <div id="tsns-dm-wrap">
+          <div id="tsns-dm-msgs"></div>
+          <div id="tsns-typing" class="tsns-hidden">
+            <div class="tsns-avatar sm" style="background:#ff4fa3;"><img src="assets/img/tapu.jpg" alt=""></div>
+            <div class="tsns-typing-cloud">
+              <span class="tsns-dot"></span><span class="tsns-dot"></span><span class="tsns-dot"></span>
+            </div>
+            <div class="tsns-typing-label" id="tsns-typing-label"></div>
+          </div>
+          <div id="tsns-stamp-panel" class="tsns-hidden"></div>
+          <div id="tsns-word-panel" class="tsns-hidden"></div>
+          <div id="tsns-dm-input-area">
+            <button id="tsns-stamp-toggle" title="スタンプ">🍡</button>
+            <button id="tsns-word-toggle" title="ワード一覧">💭</button>
+            <textarea id="tsns-dm-input" placeholder="メッセージを入力…" rows="1"></textarea>
+            <button id="tsns-dm-send">送信</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- 通知 ---- -->
+      <div id="tsns-panel-notify" class="tsns-panel tsns-hidden">
+        <div class="tsns-notif-list" id="tsns-notif-list"></div>
+      </div>
+
+      <!-- ---- たぷプロフィール ---- -->
+      <div id="tsns-panel-tapu-profile" class="tsns-panel tsns-hidden">
+        <div id="tsns-tapu-profile-inner">
+          <div class="tsns-profile-banner"></div>
+          <div class="tsns-profile-avatar-wrap">
+            <div class="tsns-profile-avatar-border">
+              <div class="tsns-avatar lg" style="background:#ff4fa3;"><img src="assets/img/tapu.jpg" alt=""></div>
+            </div>
+          </div>
+          <div class="tsns-profile-info">
+            <div class="tsns-profile-dname">たぷたぷぷ <span class="tsns-verified">✓</span></div>
+            <div class="tsns-profile-handle">@taputapupu</div>
+            <div class="tsns-profile-bio">配信者🍡道産子｜たぷたぷしてます！フォローよろしく〜！</div>
+            <div class="tsns-profile-stats">
+              <span><b id="tsns-tapu-follower-count">24.8万</b> フォロワー</span>
+              <span><b>北海道</b> 在住</span>
+            </div>
+          </div>
+        </div>
+        <div class="tsns-profile-posts-title">投稿</div>
+        <div id="tsns-tapu-posts" class="tsns-feed"></div>
+      </div>
+
+      <!-- ---- マイページ ---- -->
+      <div id="tsns-panel-my-profile" class="tsns-panel tsns-hidden">
+        <div id="tsns-my-profile-inner">
+          <div class="tsns-edit-avatar-wrap">
+            <label class="tsns-edit-avatar-border">
+              <div class="tsns-avatar xl" id="tsns-my-avatar-preview" style="background:#ff8dc7;">🍡</div>
+              <input type="file" id="tsns-avatar-file" accept="image/*" style="display:none;">
+            </label>
+            <div class="tsns-edit-avatar-hint">タップしてアイコン画像を変更</div>
+          </div>
+          <div class="tsns-form">
+            <div class="tsns-form-row">
+              <label>ユーザー名</label>
+              <input type="text" id="tsns-input-name" maxlength="20" placeholder="おもち">
+            </div>
+            <div class="tsns-form-row">
+              <label>ハンドル（@から始まるID）</label>
+              <input type="text" id="tsns-input-handle" maxlength="20" placeholder="@omochi_fan">
+            </div>
+            <div class="tsns-form-row">
+              <label>一言</label>
+              <textarea id="tsns-input-bio" maxlength="60" placeholder="たぷたぷぷの大ファンです🍡"></textarea>
+            </div>
+            <div class="tsns-form-row">
+              <label>たぷに呼んでほしい呼び方</label>
+              <input type="text" id="tsns-input-nickname" maxlength="20" placeholder="例：おもち／おもちちゃん／呼び捨てならそのまま名前だけ">
+              <div class="tsns-form-hint">DMの中でたぷがたまにこの呼び方できみを呼びます（呼び捨てOK・自由入力）</div>
+            </div>
+            <button id="tsns-save-profile">保存する</button>
+          </div>
+        </div>
+        <div class="tsns-profile-posts-title">自分の投稿</div>
+        <div id="tsns-my-posts" class="tsns-feed"></div>
+      </div>
+
+    </div>
+
+    <!-- ===== BOTTOM TABS ===== -->
+    <div id="tsns-tabs">
+      <button class="tsns-tab tsns-active" data-panel="home">
+        <span class="tsns-tab-icon">🏠</span><span class="tsns-tab-label">ホーム</span>
+      </button>
+      <button class="tsns-tab" data-panel="dm">
+        <span class="tsns-tab-icon">💌</span><span class="tsns-tab-label">DM</span>
+        <span class="tsns-badge tsns-hidden" id="tsns-badge-dm">0</span>
+      </button>
+      <button class="tsns-tab" data-panel="notify">
+        <span class="tsns-tab-icon">🔔</span><span class="tsns-tab-label">通知</span>
+        <span class="tsns-badge tsns-hidden" id="tsns-badge-notify">0</span>
+      </button>
+      <button class="tsns-tab" data-panel="tapu-profile">
+        <span class="tsns-tab-icon">💓</span><span class="tsns-tab-label">たぷ</span>
+      </button>
+      <button class="tsns-tab" data-panel="my-profile">
+        <span class="tsns-tab-icon">🍡</span><span class="tsns-tab-label">マイページ</span>
+      </button>
+    </div>
+
+    <div id="tsns-toast" class="tsns-hidden"></div>
+
+  </div>
+</div>
+
+<!-- ===== リプライモーダル ===== -->
+<div id="tsns-reply-modal" class="tsns-hidden">
+  <div id="tsns-reply-inner">
+    <div id="tsns-reply-bar">
+      <span>返信する</span>
+      <button id="tsns-reply-post-btn">返信</button>
+      <button id="tsns-reply-close">✕</button>
+    </div>
+    <div id="tsns-reply-original"></div>
+    <textarea id="tsns-reply-textarea" placeholder="返信を入力…"></textarea>
+  </div>
+</div>
+
+<!-- ===== 画像ビューア ===== -->
+<div id="tsns-image-viewer" class="tsns-hidden">
+  <img id="tsns-image-full" src="" alt="">
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/topics.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/sound.js"></script>
+<script src="js/state.js"></script>
+<script src="js/replies_data.js"></script>
+<script src="js/notify_data.js"></script>
+<script src="js/replies.js"></script>
+<script src="js/voice.js"></script>
+<script src="js/notifications.js"></script>
+<script src="data/seed_posts.js"></script>
+<script src="js/ui-home.js"></script>
+<script src="js/ui-dm.js"></script>
+<script src="js/ui-notify.js"></script>
+<script src="js/ui-profile.js"></script>
+<script src="js/engagement.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
